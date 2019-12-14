@@ -14,6 +14,7 @@ import 'package:analyzer/src/dart/analysis/results.dart';
 // </TRANSITIONAL_API>
 
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/analysis/session.dart';
 import 'package:build/build.dart';
 import 'package:build/build.dart' as build show log;
 import 'package:logging/logging.dart';
@@ -103,7 +104,7 @@ class BuilderLogger {
     // <TRANSITIONAL_API>
     ElementDeclarationResult elementDeclaration;
     if (element.kind != ElementKind.DYNAMIC) {
-      var parsedLibrary = ParsedLibraryResultImpl.tmp(element.library);
+      var parsedLibrary = AnalysisSession.getParsedLibraryByElement(element);
       if (parsedLibrary.state == ResultState.VALID) {
         elementDeclaration = parsedLibrary.getElementDeclaration(element);
       }
